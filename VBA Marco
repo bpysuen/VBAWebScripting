@@ -32,7 +32,7 @@ Sub Latest()
     Release_Date = Format(DateAdd("m", -2, Date), "YYYYMMDD")
     
     'Set Zip Folder path to Unzip and Creating The Destination of File
-    Dim FolderPath As String: Path = "\\OAFILE06\bpysuen$\Desktop\US_Files\" 'Define Folder to Save Temp Data Worksheet, will delete after import to Database
+    Dim FolderPath As String: Path = Path\       ' Real path is not included       'Define Folder to Save Temp Data Worksheet, will delete after import to Database
     Dim FileDestination As String: FileDestination = FolderPath & Release_Date     'Define File Name
     Dim CsvFile As Variant: CsvFile = FileDestination & ".csv"                     'Noted that Zip File including the "US Long-term Securities" is named "YYYYMMDD.zip"
  
@@ -62,7 +62,7 @@ Sub Historic()
     FindReleaseFile XMLReq.responseText ' Return Release_Date and FileURL
       
     'Set Zip Folder path to Unzip and Creating The Destination of File
-    Dim FolderPath As String: FolderPath = "\\OAFILE06\bpysuen$\Desktop\US_Files\" 'Define Folder to Save Temp Data Worksheet, will delete after import to Database
+    Dim FolderPath As String: FolderPath = Path\       ' Real path is not included 'Define Folder to Save Temp Data Worksheet, will delete after import to Database
     Dim FileDestination As String: FileDestination = FolderPath & Release_Date     'Define File Name
     Dim ZipFile As Variant: ZipFile = FileDestination & ".zip"                     'Noted that Zip File including the "US Long-term Securities" is named "YYYYMMDD.zip"
     Dim TargetFile As String: TargetFile = "snetus.txt"                            'Noted that TXT File of the "US Long-term Securities" is named "snetus.txt"
@@ -91,44 +91,47 @@ End Sub
 Function DownloadFileFromPage(FileURL As String, ZipFile As Variant)
 
     ' Download the Zip File and Check The Result
-    If URLDownloadToFile(0, FileURL, ZipFile, 0, 0) = 0 Then
-        Debug.Print "File download started"
-    Else
-        Debug.Print "File download not started"
-    End If
+    ...
+        ...
+    ...
+        ...
+    ...
     
 End Function
+    
     
 Function Database(TempWs As Worksheet)
 '' Import Data to Excel Database
 
     'Defing the Workbook and Worksheets
-    Dim Wb As Workbook: Set Wb = Workbooks("US Securities.xlsm")
-    Dim CtyWs As Worksheet: Set CtyWs = Wb.Sheets("All Country")
-    Dim HKWs As Worksheet: Set HKWs = Wb.Sheets("Hong Kong")
+    ...
+    ...
+    ...
     
     'Copy Data from The Temp Workbook
-    With CtyWs
-        .Range("B:G").EntireColumn.Insert
-        .Range("B:G").ColumnWidth = 8.5                         ' Format Reminder: If not include this property, the cell will be too wide
-        .Range("B3:F106") = TempWs.Range("B12:F115").Value
-        .Range("B2") = Format$(TempWs.Range("D10"), "MMM-YYYY") ' Error Reminder: If not include this format, the value will be shown as number
-    End With
+    ...
+        ...
+        ...
+        ...
+        ...
+    ...
     
 
 '' Copy Hong Kong Data from The Database
 
     ' Copy Reported Month
-    HKWs.ListObjects("data1").ListRows.Add 1
-    HKWs.Range("I13") = Format$(CtyWs.Range("B2"), "MMM-YYYY")  ' Error Reminder: If not include this format will show a number
+    ...
+    ...
 
     ' Copy the Observations
-    Dim i, Amount As Double: For i = 0 To 4
-        Amount = CtyWs.Cells(65, 2 + i)
-        HKWs.Cells(13, 10 + i) = Amount * 1000000
-    Next
+    ...
+        ...
+        ...
+    ...
     
 End Function
+
+
 Function entUnZip1File(ByVal strZipFilename, ByVal strDstDir, ByVal strFilename)
 
     Const glngcCopyHereDisplayProgressBox = 256
@@ -177,15 +180,10 @@ Function FindReleaseFile(HTMLText As String)
     ' Creating The HTML Doc
     Dim HTMLDoc As New MSHTML.HTMLDocument
     HTMLDoc.body.innerHTML = HTMLText
-    
-    ' Defining Links Div
-'    Dim LinksDiv As MSHTML.IHTMLElement
-'    Set LinksDiv = HTMLDoc.getElementsByClassName("field field--name-field-page-body field--type-text-long field--label-hidden field__item")(0)
-    
+      
     ' Creating HTML Collection with Links
     Dim Links As MSHTML.IHTMLElementCollection
     Set Links = HTMLDoc.getElementsByTagName("a")
-'    Set Links = LinksDiv.getElementsByTagName("a")
 
     ' Looping Over The Collection of Links
     Dim Link As MSHTML.IHTMLElement: For Each Link In Links
@@ -197,7 +195,6 @@ Function FindReleaseFile(HTMLText As String)
     Next Link
     
 End Function
-
 
 
 Function DeleteFile(FileName As Variant) 'Deleting The File
