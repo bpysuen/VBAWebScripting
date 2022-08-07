@@ -22,6 +22,7 @@ Dim FileURL As String              ' Return by Function FindReleaseFile()
         ByVal lpfnCB As Long) As Long
 #End If
 
+
 Sub Latest()
 
 '' Extracting "US Long-term Securities" Data from the "US Tresury Data Releases"
@@ -47,7 +48,6 @@ Sub Latest()
     'Delete the Temp Workbook
     CsvFile.Close
     DeleteFile CsvFile
-    
     
 End Sub
 
@@ -84,8 +84,7 @@ Sub Historic()
     'Delete the Temp Workbook
     TempWb.Close
     DeleteFile FileDestination & ".xlsx"
-    
-    
+      
 End Sub
 
 Function DownloadFileFromPage(FileURL As String, ZipFile As Variant)
@@ -116,7 +115,6 @@ Function Database(TempWs As Worksheet)
         ...
     ...
     
-
 '' Copy Hong Kong Data from The Database
 
     ' Copy Reported Month
